@@ -3,80 +3,81 @@ import SecurityFooter from '../components/SecurityFooter';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-neutral-950 text-white p-6 flex flex-col justify-between selection:bg-amber-500 selection:text-neutral-950">
-      {/* هدر و معماری DevOps */}
-      <div className="max-w-4xl mx-auto w-full">
-        <header className="flex flex-col md:flex-row justify-between items-center border-b border-neutral-800 pb-6 mb-8 gap-4">
+    <div style={{ backgroundColor: '#0a0a0a', color: '#ffffff', minHeight: '100vh', padding: '20px', fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      
+      {/* هدر و برندینگ */}
+      <div>
+        <div style={{ borderBottom: '1px solid #262626', paddingBottom: '15px', marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
           <div>
-            <div className="inline-block bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs px-3 py-1 rounded-full mb-2">
-              استارتاپ فناورانه هوش مصنوعی رویال فام | مدیریت: امیر سام یعقوبی
-            </div>
-            <h1 className="text-3xl font-black bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 bg-clip-text text-transparent">
-              InstaAdmin AI - Enterprise Edition
+            <span style={{ backgroundColor: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', border: '1px solid rgba(245, 158, 11, 0.3)', padding: '4px 12px', borderRadius: '20px', fontSize: '11px' }}>
+              استارتاپ فناورانه رویال فام | مدیریت: امیر سام یعقوبی
+            </span>
+            <h1 style={{ fontSize: '24px', fontWeight: '900', background: 'linear-gradient(to right, #f59e0b, #d97706)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginTop: '8px' }}>
+              InstaAdmin AI - Enterprise
             </h1>
-            <p className="text-sm text-neutral-400 mt-1">
-              پلتفرم جامع اتوماسیون سئو (۱۰,۰۰۰ کلمه کلیدی)، تحلیل رقبا و سیستم‌های امنیتی DevOps
+            <p style={{ fontSize: '12px', color: '#a3a3a3', margin: '4px 0 0 0' }}>
+              سیستم جامع تحلیل سئو (۱۰,۰۰۰ کلمه کلیدی)، رقبا و سیستم‌های امنیتی DevOps
             </p>
           </div>
-          <div className="bg-neutral-900 border border-neutral-800 px-4 py-2 rounded-xl text-xs font-mono text-emerald-400 shadow-inner">
-            DevOps Node: Port 5030 [Active]
-          </div>
-        </header>
-
-        {/* کارت‌های آماری و قابلیت‌ها */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="bg-neutral-900/80 border border-neutral-800 p-5 rounded-2xl shadow-lg">
-            <h3 className="text-xs text-neutral-400 font-medium">موتور سئو پیشرفته</h3>
-            <p className="text-2xl font-bold text-amber-400 mt-2">۱۰,۰۰۰ کلیدواژه</p>
-            <span className="text-xs text-emerald-400 mt-1 block">ایندکس روزانه و خودکار</span>
-          </div>
-          <div className="bg-neutral-900/80 border border-neutral-800 p-5 rounded-2xl shadow-lg">
-            <h3 className="text-xs text-neutral-400 font-medium">پوشش جغرافیایی</h3>
-            <p className="text-2xl font-bold text-blue-400 mt-2">۳۱ استان / ۲۲ منطقه</p>
-            <span className="text-xs text-neutral-400 mt-1 block">بنچمارک و ردیابی محلی</span>
-          </div>
-          <div className="bg-neutral-900/80 border border-neutral-800 p-5 rounded-2xl shadow-lg">
-            <h3 className="text-xs text-neutral-400 font-medium">درگاه پرداخت امن</h3>
-            <p className="text-2xl font-bold text-emerald-400 mt-2">کارت به کارت بانک ملی</p>
-            <span className="text-xs text-neutral-400 mt-1 block">تایید خودکار فیش (واتساپ/بله)</span>
+          <div style={{ backgroundColor: '#171717', border: '1px solid #262626', padding: '6px 12px', borderRadius: '8px', fontSize: '11px', color: '#10b981', fontFamily: 'monospace' }}>
+            Port: 5030 [Stable]
           </div>
         </div>
 
-        {/* فرم اصلی تحلیل */}
-        <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-2xl mb-8 shadow-2xl">
-          <h2 className="text-base font-bold text-neutral-200 mb-4 border-b border-neutral-800 pb-2">
-            شروع تحلیل هوشمند و ردیابی رقبا
+        {/* کارت‌های آماری */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '15px', marginBottom: '20px' }}>
+          <div style={{ backgroundColor: '#121212', border: '1px solid #262626', padding: '15px', borderRadius: '12px' }}>
+            <div style={{ fontSize: '11px', color: '#a3a3a3' }}>کلمات کلیدی فعال</div>
+            <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#f59e0b', marginTop: '5px' }}>۱۰,۰۰۰ کلیدواژه</div>
+            <div style={{ fontSize: '10px', color: '#10b981', marginTop: '4px' }}>ایندکس روزانه و خودکار</div>
+          </div>
+          <div style={{ backgroundColor: '#121212', border: '1px solid #262626', padding: '15px', borderRadius: '12px' }}>
+            <div style={{ fontSize: '11px', color: '#a3a3a3' }}>پوشش رقبا</div>
+            <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#3b82f6', marginTop: '5px' }}>۳۱ استان / ۲۲ منطقه</div>
+            <div style={{ fontSize: '10px', color: '#a3a3a3', marginTop: '4px' }}>بنچمارک و سئو محلی</div>
+          </div>
+          <div style={{ backgroundColor: '#121212', border: '1px solid #262626', padding: '15px', borderRadius: '12px' }}>
+            <div style={{ fontSize: '11px', color: '#a3a3a3' }}>درگاه پرداخت امن</div>
+            <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#10b981', marginTop: '5px' }}>کارت به کارت بانک ملی</div>
+            <div style={{ fontSize: '10px', color: '#a3a3a3', marginTop: '4px' }}>تایید خودکار فیش (واتساپ/بله)</div>
+          </div>
+        </div>
+
+        {/* فرم اصلی */}
+        <div style={{ backgroundColor: '#121212', border: '1px solid #262626', padding: '20px', borderRadius: '16px', marginBottom: '20px' }}>
+          <h2 style={{ fontSize: '14px', fontWeight: 'bold', color: '#e5e5e5', marginBottom: '15px', borderBottom: '1px solid #262626', paddingBottom: '8px' }}>
+            شروع تحلیل هوشمند و ردیابی کلمات
           </h2>
-          <div className="space-y-4">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <div>
-              <label className="text-xs text-neutral-400 block mb-1">آدرس وب‌سایت یا شناسه پیج اینستاگرام</label>
+              <label style={{ fontSize: '11px', color: '#a3a3a3', display: 'block', marginBottom: '5px' }}>آدرس وب‌سایت یا پیج اینستاگرام</label>
               <input 
                 type="text" 
                 placeholder="https://example.com" 
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-4 py-3 text-sm text-neutral-200 focus:border-amber-500 outline-none transition-all"
+                style={{ width: '100%', backgroundColor: '#050505', border: '1px solid #262626', borderRadius: '10px', padding: '12px', fontSize: '13px', color: '#fff', outline: 'none', boxSizing: 'border-box' }}
               />
             </div>
-            <button className="w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-neutral-950 font-bold py-3.5 rounded-xl text-sm shadow-lg hover:opacity-95 transition-all">
+            <button style={{ width: '100%', background: 'linear-gradient(to right, #f59e0b, #d97706)', color: '#0a0a0a', fontWeight: 'bold', padding: '12px', borderRadius: '10px', fontSize: '13px', border: 'none', cursor: 'pointer' }}>
               اجرای تحلیل جامع + نمودار + ۵ رقیب برتر
             </button>
           </div>
         </div>
 
-        {/* بخش قابلیت‌های امنیتی و ضد مهندسی معکوس */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          <div className="bg-neutral-900/50 border border-neutral-800 p-4 rounded-xl">
-            <h4 className="text-xs font-bold text-amber-400 mb-1">🛡️ رمزنگاری لبه (Edge Encryption)</h4>
-            <p className="text-xs text-neutral-400">مجهز به رمزنگاری نامتقارن و لبه جهت جلوگیری کامل از شنود، استخراج دیتا و نفوذ به سرور.</p>
+        {/* بخش امنیت و رمزنگاری */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '15px', marginBottom: '20px' }}>
+          <div style={{ backgroundColor: 'rgba(18, 18, 18, 0.6)', border: '1px solid #262626', padding: '15px', borderRadius: '12px' }}>
+            <h4 style={{ fontSize: '12px', fontWeight: 'bold', color: '#f59e0b', margin: '0 0 5px 0' }}>🛡️ رمزنگاری لبه (Edge Encryption)</h4>
+            <p style={{ fontSize: '11px', color: '#a3a3a3', margin: '0' }}>مجهز به رمزنگاری نامتقارن و لبه جهت جلوگیری کامل از شنود و نفوذ.</p>
           </div>
-          <div className="bg-neutral-900/50 border border-neutral-800 p-4 rounded-xl">
-            <h4 className="text-xs font-bold text-amber-400 mb-1">🔒 حفاظت ضد مهندسی معکوس و Wappalyzer</h4>
-            <p className="text-xs text-neutral-400">کدهای فرانت‌اند و بک‌اند کاملاً مبهم‌سازی‌شده (Obfuscated) و غیرقابل شناسایی توسط ابزارهای تحلیل تکنولوژی.</p>
+          <div style={{ backgroundColor: 'rgba(18, 18, 18, 0.6)', border: '1px solid #262626', padding: '15px', borderRadius: '12px' }}>
+            <h4 style={{ fontSize: '12px', fontWeight: 'bold', color: '#f59e0b', margin: '0 0 5px 0' }}>🔒 حفاظت ضد مهندسی معکوس</h4>
+            <p style={{ fontSize: '11px', color: '#a3a3a3', margin: '0' }}>کدهای فرانت‌اند و بک‌اند کاملاً مبهم‌سازی‌شده و غیرقابل شناسایی.</p>
           </div>
         </div>
       </div>
 
       {/* فوتر امنیتی و قانونی */}
       <SecurityFooter />
-    </main>
+    </div>
   );
 }
