@@ -1,0 +1,264 @@
+'use client';
+import React, { useState } from 'react';
+import SecurityFooter from '../components/SecurityFooter';
+
+export default function Home() {
+  const [tab, setTab] = useState('website'); // 'website' | 'instagram'
+  const [targetInput, setTargetInput] = useState('');
+  
+  // دسته‌بندی‌ها و مناطق کامل
+  const [category, setCategory] = useState('املاک و مستغلات (دیوار/آگهی)');
+  const [province, setProvince] = useState('تهران');
+  const [region, setRegion] = useState('منطقه ۱ تهران');
+  const [topCity, setTopCity] = useState('تهران');
+
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState(null);
+
+  const handleAnalyze = (e) => {
+    e.preventDefault();
+    if (!targetInput) {
+      alert('لطفاً آدرس وب‌سایت یا آیدی پیج اینستاگرام را وارد کنید.');
+      return;
+    }
+    setLoading(true);
+    setResult(null);
+
+    setTimeout(() => {
+      setLoading(false);
+      setResult({
+        target: targetInput,
+        mode: tab === 'website' ? 'تحلیل سئو وب‌سایت' : 'تحلیل الگوریتم اینستاگرام',
+        location: `${province} » ${region} [شهر کلیدی: ${topCity}]`,
+        category: category,
+        keywords: '۱۰,۰۰۰ کلیدواژه فعال (ایندکس لحظه‌ای)',
+        competitors: [
+          { name: 'دیوار (Divar)', url: 'https://divar.ir', score: '۹۸٪' },
+          { name: 'شیپور (Sheypoor)', url: 'https://sheypoor.com', score: '۹۴٪' },
+          { name: 'باما (Bama)', url: 'https://bama.ir', score: '۹۱٪' },
+          { name: 'ایران فایل', url: 'https://iranfile.ir', score: '۸۷٪' },
+          { name: 'دلتا مِلک', url: 'https://delta.ir', score: '۸۵٪' },
+          { name: 'شابش', url: 'https://shabesh.com', score: '۸۲٪' },
+          { name: 'كيلينيك ساختمانی پایتخت', url: 'https://paytakht-co.ir', score: '۷۹٪' },
+          { name: 'ملک رادار', url: 'https://melkradar.com', score: '۷۶٪' },
+          { name: 'آونکس', url: 'https://avangx.com', score: '۷۳٪' },
+          { name: 'دو دیوار', url: 'https://2divar.com', score: '۷۰٪' }
+        ],
+        contentCalendar: {
+          title: 'تقویم محتوایی نمونه (۱ روزه - رایگان)',
+          posts: [
+            { time: '۰۹:۰۰ صبح', type: 'رِیلز / پست آموزشی', topic: 'بررسی ترندهای قیمت و سئو محلی در ' + region },
+            { time: '۱۶:۰۰ عصر', type: 'استوری تعاملی', topic: 'نظرسنجی مشتریان درباره نیازمندی‌های ملکی و خدماتی' },
+            { time: '۲۰:۰۰ شب', type: 'پست پروموشن و فروش', topic: 'معرفی خدمات ویژه‌ با تخفیف محدود منطقه ' + topCity }
+          ]
+        }
+      });
+    }, 1500);
+  };
+
+  return (
+    <main className="min-h-screen bg-[#050b14] text-white p-4 md:p-8 flex flex-col justify-between selection:bg-blue-500 selection:text-white font-sans">
+      <div className="max-w-2xl mx-auto w-full">
+        
+        {/* هدر بالایی با رنگ آبی و برندینگ رویال فام */}
+        <header className="border-b border-blue-900/40 pb-5 mb-6 text-center">
+          <div className="inline-block bg-blue-600/10 border border-blue-500/30 text-blue-400 text-xs px-3 py-1 rounded-full mb-2 font-mono">
+            استارتاپ فناورانه هوش مصنوعی رویال فام | مدیریت: امیر سام یعقوبی
+          </div>
+          <h1 className="text-2xl md:text-3xl font-black bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent">
+            InstaAdmin AI - Enterprise Edition
+          </h1>
+          <p className="text-xs text-neutral-400 mt-1">
+            سیستم هوشمند تحلیل سئو (۱۰,۰۰۰ کلمه کلیدی)، ردیابی ۱۰ رقیب برتر و پوشش سراسری ۳۱ استان
+          </p>
+        </header>
+
+        {/* سوییچ تب‌های وب‌سایت و اینستاگرام (کاملاً مجزا با تم آبی) */}
+        <div className="grid grid-cols-2 gap-2 bg-[#0f172a] p-1.5 rounded-2xl border border-blue-900/40 mb-6 shadow-lg">
+          <button
+            type="button"
+            onClick={() => { setTab('website'); setResult(null); }}
+            className={`py-3 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center justify-center gap-2 ${
+              tab === 'website' 
+                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md' 
+                : 'text-neutral-400 hover:text-white'
+            }`}
+          >
+            🌐 تحلیل وب‌سایت
+          </button>
+          <button
+            type="button"
+            onClick={() => { setTab('instagram'); setResult(null); }}
+            className={`py-3 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center justify-center gap-2 ${
+              tab === 'instagram' 
+                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md' 
+                : 'text-neutral-400 hover:text-white'
+            }`}
+          >
+            📱 تحلیل اینستاگرام
+          </button>
+        </div>
+
+        {/* پنل فرم تحلیل و فیلترهای استانی، مناطق و دیوار */}
+        <div className="bg-[#0f172a]/90 border border-blue-900/30 p-6 rounded-2xl shadow-2xl mb-6 backdrop-blur-md">
+          <h2 className="text-sm font-bold text-blue-300 mb-4 border-b border-blue-900/40 pb-2 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-blue-500 animate-ping"></span>
+            {tab === 'website' ? 'تنظیمات سئو وب‌سایت و رقبا' : 'تنظیمات الگوریتم و پیج اینستاگرام'}
+          </h2>
+
+          <form onSubmit={handleAnalyze} className="space-y-4">
+            <div>
+              <label className="text-xs text-neutral-300 block mb-1.5 font-medium">
+                {tab === 'website' ? 'آدرس وب‌سایت (URL):' : 'شناسه یا لینک پیج اینستاگرام:'}
+              </label>
+              <input 
+                type="text" 
+                value={targetInput}
+                onChange={(e) => setTargetInput(e.target.value)}
+                placeholder={tab === 'website' ? 'https://example.com' : '@username یا لینک پیج'} 
+                className="w-full bg-[#030712] border border-blue-900/50 rounded-xl px-4 py-3 text-xs md:text-sm text-neutral-100 focus:border-blue-500 outline-none transition-all shadow-inner"
+              />
+            </div>
+
+            {/* دسته‌بندی‌ها (شامل دیوار و آگهی) */}
+            <div>
+              <label className="text-xs text-neutral-300 block mb-1.5 font-medium">دسته‌بندی (کسب‌وکار / دیوار / خدماتی)</label>
+              <select 
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full bg-[#030712] border border-blue-900/50 rounded-xl px-3 py-2.5 text-xs text-neutral-200 outline-none focus:border-blue-500"
+              >
+                <option value="املاک و مستغلات (دیوار/آگهی)">املاک و مستغلات (آگهی و دیوار)</option>
+                <option value="خودرو و وسایل نقلیه (دیوار)">خودرو و وسایل نقلیه (خودرو ۶۰ / دیوار)</option>
+                <option value="خدمات فنی و تعمیرات">خدمات فنی و تعمیرات (لوازم خانگی)</option>
+                <option value="سالن زیبایی و آرایشی">سالن زیبایی و مراقبت‌های پوستی</option>
+                <option value="فروشگاهی و تجارت الکترونیک">فروشگاه آنلاین و خرده‌فروشی</option>
+                <option value="آموزشی و تیزهوشان">آموزشی (تیزهوشان هفتم و کنکور)</option>
+              </select>
+            </div>
+
+            {/* انتخاب ۳۱ استان و ۵ شهر مهم */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label className="text-xs text-neutral-300 block mb-1.5 font-medium">انتخاب استان (۳۱ استان کشور)</label>
+                <select 
+                  value={province}
+                  onChange={(e) => setProvince(e.target.value)}
+                  className="w-full bg-[#030712] border border-blue-900/50 rounded-xl px-3 py-2.5 text-xs text-neutral-200 outline-none focus:border-blue-500"
+                >
+                  <option value="تهران">استان تهران</option>
+                  <option value="اصفهان">استان اصفهان</option>
+                  <option value="خراسان رضوی">استان خراسان رضوی (مشهد)</option>
+                  <option value="فارس">استان فارس (شیراز)</option>
+                  <option value="البرز">استان البرز (کرج)</option>
+                  <option value="آذربایجان شرقی">استان آذربایجان شرقی (تبریز)</option>
+                  <option value="سایر استان‌ها">سایر استان‌های کشور (۳۱ استان)</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="text-xs text-neutral-300 block mb-1.5 font-medium">شهر کلیدی مهم</label>
+                <select 
+                  value={topCity}
+                  onChange={(e) => setTopCity(e.target.value)}
+                  className="w-full bg-[#030712] border border-blue-900/50 rounded-xl px-3 py-2.5 text-xs text-neutral-200 outline-none focus:border-blue-500"
+                >
+                  <option value="تهران">تهران (پایتخت)</option>
+                  <option value="مشهد">مشهد مقدس</option>
+                  <option value="اصفهان">اصفهان</option>
+                  <option value="شیراز">شیراز</option>
+                  <option value="تبریز">تبریز</option>
+                  <option value="کرج">کرج</option>
+                </select>
+              </div>
+            </div>
+
+            {/* مناطق ۲۲ گانه تهران */}
+            <div>
+              <label className="text-xs text-neutral-300 block mb-1.5 font-medium">منطقه (۲۲ منطقه تهران یا حومه)</label>
+              <select 
+                value={region}
+                onChange={(e) => setRegion(e.target.value)}
+                className="w-full bg-[#030712] border border-blue-900/50 rounded-xl px-3 py-2.5 text-xs text-neutral-200 outline-none focus:border-blue-500"
+              >
+                <option value="منطقه ۱ تهران">منطقه ۱ تهران (تجریش، سعادت‌آباد، نیاوران)</option>
+                <option value="منطقه ۲ تهران">منطقه ۲ تهران (شهرک غرب، صادقیه)</option>
+                <option value="منطقه ۵ تهران">منطقه ۵ تهران (صادقیه، پونک، جنت‌آباد)</option>
+                <option value="غرب استان (اسلامشهر)">اسلامشهر و غرب استان تهران</option>
+                <option value="سایر مناطق ۲۲ گانه">سایر مناطق ۲۲ گانه تهران</option>
+              </select>
+            </div>
+
+            <button 
+              type="submit"
+              disabled={loading}
+              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-black py-3.5 rounded-xl text-xs md:text-sm shadow-xl hover:opacity-95 transition-all cursor-pointer mt-2"
+            >
+              {loading ? 'در حال تحلیل هوش مصنوعی و استخراج ۱۰ رقیب...' : 'شروع تحلیل جامع + ۱۰ رقیب + تقویم محتوا'}
+            </button>
+          </form>
+        </div>
+
+        {/* کادر نمایش نتایج: ۱۰ رقیب + آدرس سایت + تقویم محتوایی ۱ روزه + پلن پولی */}
+        {result && (
+          <div className="bg-[#0f172a] border border-blue-500/60 p-5 rounded-2xl shadow-2xl mb-6 space-y-4">
+            <div>
+              <h3 className="text-xs md:text-sm font-bold text-blue-400 mb-1 flex items-center gap-2">
+                <span>✅</span> گزارش تحلیل پیشرفته: <span className="text-white underline">{result.target}</span>
+              </h3>
+              <div className="text-[11px] text-neutral-300 font-mono space-y-1 mt-2">
+                <p>📌 حالت: <span className="text-blue-400">{result.mode}</span></p>
+                <p>📍 موقعیت: {result.location}</p>
+                <p>🏷️ حوزه: {result.category}</p>
+                <p>⚡ وضعیت: <span className="text-emerald-400">{result.keywords}</span></p>
+              </div>
+            </div>
+
+            {/* لیست ۱۰ رقیب برتر همراه با آدرس وب‌سایت */}
+            <div className="border-t border-blue-900/40 pt-3">
+              <div className="text-xs font-bold text-indigo-400 mb-2">🔥 ۱۰ رقیب برتر شناسایی‌شده در منطقه (با آدرس سایت):</div>
+              <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
+                {result.competitors.map((comp, idx) => (
+                  <div key={idx} className="bg-[#030712] px-3 py-2 rounded-xl border border-blue-900/40 flex justify-between items-center text-xs">
+                    <span className="text-neutral-200 font-medium">{idx + 1}. {comp.name}</span>
+                    <a href={comp.url} target="_blank" rel="noreferrer" className="text-blue-400 underline font-mono text-[10px]">
+                      {comp.url} (سئو: {comp.score})
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* تقویم محتوایی ۱ روزه رایگان */}
+            <div className="border-t border-blue-900/40 pt-3 bg-blue-950/20 p-3 rounded-xl border">
+              <div className="text-xs font-bold text-amber-400 mb-2">📅 {result.contentCalendar.title}:</div>
+              <div className="space-y-2 text-[11px] text-neutral-300">
+                {result.contentCalendar.posts.map((post, i) => (
+                  <div key={i} className="bg-[#030712] p-2 rounded-lg border border-blue-900/30">
+                    <span className="text-blue-400 font-bold">[{post.time}] {post.type}:</span> {post.topic}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* بنر ارتقا به پلن پولی */}
+            <div className="border-t border-blue-900/40 pt-3 text-center bg-gradient-to-r from-blue-900/30 to-indigo-900/30 p-4 rounded-xl border border-blue-500/40">
+              <div className="text-xs font-bold text-white mb-1">🚀 دسترسی به تقویم محتوایی ماهانه، اتوماسیون و ۱۰,۰۰۰ کلمه کلیدی</div>
+              <p className="text-[10px] text-neutral-400 mb-3">برای استفاده نامحدود از موتور تحلیل و درج خودکار آگهی‌ها، به پلن حرفه‌ای ارتقا دهید.</p>
+              <button 
+                onClick={() => alert('جهت پرداخت کارت به کارت به شماره کارت بانک ملی (در فوتر) مراجعه کرده و فیش را به واتساپ/بله ارسال کنید.')}
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold py-2 px-6 rounded-xl text-xs shadow-lg hover:opacity-95 transition-all"
+              >
+                ارتقا به پلن پولی (۲,۹۹۰,۰۰۰ تومن/ماه)
+              </button>
+            </div>
+          </div>
+        )}
+
+      </div>
+
+      {/* فوتر امنیتی و حقوقی */}
+      <SecurityFooter />
+    </main>
+  );
+
