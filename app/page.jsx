@@ -3,126 +3,113 @@ import React, { useState } from 'react';
 import SecurityFooter from '../components/SecurityFooter';
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState('website'); // 'website' or 'instagram'
-  const [targetInput, setTargetInput] = useState('');
+  const [tab, setTab] = useState('website'); // 'website' | 'instagram'
+  const [urlInput, setUrlInput] = useState('');
   const [category, setCategory] = useState('اخبار و رسانه');
   const [subCategory, setSubCategory] = useState('خبرگزاری');
-  const [region, setRegion] = useState('منطقه ۱');
+  const [region, setRegion] = useState('منطقه ۱ (تهران)');
   const [loading, setLoading] = useState(false);
-  const [analysisResult, setAnalysisResult] = useState(null);
+  const [result, setResult] = useState(null);
 
-  const handleRunAnalysis = (e) => {
+  const handleAnalyze = (e) => {
     e.preventDefault();
-    if (!targetInput) {
-      alert('لطفاً آدرس یا شناسه مورد نظر را وارد کنید.');
+    if (!urlInput) {
+      alert('لطفاً آدرس یا شناسه هدف را وارد کنید.');
       return;
     }
     setLoading(true);
-    setAnalysisResult(null);
+    setResult(null);
 
     setTimeout(() => {
       setLoading(false);
-      setAnalysisResult({
-        target: targetInput,
-        type: activeTab === 'website' ? 'وب‌سایت' : 'اینستاگرام',
-        category: `${category} / ${subCategory} (${region})`,
-        keywordsIndexed: '۱۰,۰۰۰ کلیدواژه فعال',
+      setResult({
+        target: urlInput,
+        mode: tab === 'website' ? 'تحلیل سئو وب‌سایت' : 'تحلیل الگوریتم اینستاگرام',
+        meta: `${category} » ${subCategory} [${region}]`,
+        keywords: '۱۰,۰۰۰ کلیدواژه فعال (ایندکس روزانه)',
         competitors: [
-          'رقیب اول: پلتفرم پیشتاز منطقه (سئو ۹۴٪)',
-          'رقیب دوم: مرجع تخصصی حوزه (سئو ۸۸٪)',
-          'رقیب سوم: شبکه اطلاع‌رسانی برتر (سئو ۸۲٪)',
-          'رقیب چهارم: آژانس دیجیتال محلی (سئو ۷۶٪)',
-          'رقیب پنجم: استارتاپ رقیب (سئو ۷۱٪)'
+          '۱. رقیب پیشتاز منطقه‌ای (امتیاز سئو: ۹۶٪)',
+          '۲. مرجع تخصصی همکار (امتیاز سئو: ۸۹٪)',
+          '۳. شبکه اطلاع‌رسانی برتر (امتیاز سئو: ۸۴٪)',
+          '۴. پایگاه خبری محلی (امتیاز سئو: ۷۸٪)',
+          '۵. استارتاپ رقیب (امتیاز سئو: ۷۲٪)'
         ]
       });
-    }, 1500);
+    }, 1200);
   };
 
   return (
-    <div style={{ backgroundColor: '#0a0a0a', color: '#ffffff', minHeight: '100vh', padding: '16px', fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxSizing: 'border-box' }}>
-      
-      {/* هدر و برندینگ */}
-      <div style={{ maxWidth: '600px', margin: '0 auto', width: '100%' }}>
-        <header style={{ borderBottom: '1px solid #262626', paddingBottom: '12px', marginBottom: '16px', textAlign: 'center' }}>
-          <span style={{ backgroundColor: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', border: '1px solid rgba(245, 158, 11, 0.3)', padding: '3px 10px', borderRadius: '20px', fontSize: '10px' }}>
+    <main className="min-h-screen bg-[#050505] text-white p-4 md:p-8 flex flex-col justify-between selection:bg-amber-500 selection:text-black">
+      <div className="max-w-2xl mx-auto w-full">
+        
+        {/* هدر بالایی و برندینگ رویال فام */}
+        <header className="border-b border-neutral-800 pb-5 mb-6 text-center">
+          <div className="inline-block bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs px-3 py-1 rounded-full mb-2 font-mono">
             استارتاپ فناورانه رویال فام | مدیریت: امیر سام یعقوبی
-          </span>
-          <h1 style={{ fontSize: '22px', fontWeight: '900', background: 'linear-gradient(to right, #f59e0b, #d97706)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', margin: '8px 0 4px 0' }}>
+          </div>
+          <h1 className="text-2xl md:text-3xl font-black bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 bg-clip-text text-transparent">
             InstaAdmin AI - Enterprise
           </h1>
-          <p style={{ fontSize: '11px', color: '#a3a3a3', margin: '0' }}>
-            سیستم هوشمند تحلیل سئو (۱۰,۰۰۰ کلمه کلیدی) و ردیابی رقبا
+          <p className="text-xs text-neutral-400 mt-1">
+            سیستم اتوماسیون سئو پیشرفته (۱۰,۰۰۰ کلمه کلیدی) و هوش مصنوعی تحلیل رقبا
           </p>
         </header>
 
-        {/* سوییچ تب‌ها (وب‌سایت و اینستاگرام کاملاً جدا) */}
-        <div style={{ display: 'flex', backgroundColor: '#171717', borderRadius: '12px', padding: '4px', marginBottom: '16px', border: '1px solid #262626' }}>
-          <button 
+        {/* سوییچ تب‌های وب‌سایت و اینستاگرام (کاملاً جداگانه) */}
+        <div className="grid grid-cols-2 gap-2 bg-neutral-900 p-1.5 rounded-2xl border border-neutral-800 mb-6">
+          <button
             type="button"
-            onClick={() => setActiveTab('website')}
-            style={{ 
-              flex: 1, 
-              backgroundColor: activeTab === 'website' ? '#f59e0b' : 'transparent', 
-              color: activeTab === 'website' ? '#0a0a0a' : '#a3a3a3', 
-              fontWeight: 'bold', 
-              padding: '10px', 
-              borderRadius: '10px', 
-              fontSize: '12px', 
-              border: 'none', 
-              cursor: 'pointer',
-              transition: 'all 0.2s'
-            }}
+            onClick={() => { setTab('website'); setResult(null); }}
+            className={`py-3 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center justify-center gap-2 ${
+              tab === 'website' 
+                ? 'bg-gradient-to-r from-amber-500 to-yellow-600 text-neutral-950 shadow-lg' 
+                : 'text-neutral-400 hover:text-white'
+            }`}
           >
             🌐 تحلیل وب‌سایت
           </button>
-          <button 
+          <button
             type="button"
-            onClick={() => setActiveTab('instagram')}
-            style={{ 
-              flex: 1, 
-              backgroundColor: activeTab === 'instagram' ? '#f59e0b' : 'transparent', 
-              color: activeTab === 'instagram' ? '#0a0a0a' : '#a3a3a3', 
-              fontWeight: 'bold', 
-              padding: '10px', 
-              borderRadius: '10px', 
-              fontSize: '12px', 
-              border: 'none', 
-              cursor: 'pointer',
-              transition: 'all 0.2s'
-            }}
+            onClick={() => { setTab('instagram'); setResult(null); }}
+            className={`py-3 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center justify-center gap-2 ${
+              tab === 'instagram' 
+                ? 'bg-gradient-to-r from-amber-500 to-yellow-600 text-neutral-950 shadow-lg' 
+                : 'text-neutral-400 hover:text-white'
+            }`}
           >
             📱 تحلیل اینستاگرام
           </button>
         </div>
 
-        {/* فرم و دسته‌بندی‌های اختصاصی */}
-        <div style={{ backgroundColor: '#121212', border: '1px solid #262626', padding: '16px', borderRadius: '16px', marginBottom: '16px' }}>
-          <h2 style={{ fontSize: '13px', fontWeight: 'bold', color: '#e5e5e5', marginBottom: '12px', borderBottom: '1px solid #262626', paddingBottom: '6px' }}>
-            {activeTab === 'website' ? 'تنظیمات تحلیل سئو وب‌سایت' : 'تنظیمات تحلیل پیج اینستاگرام'}
+        {/* پنل فرم تحلیل اختصاصی هر تب */}
+        <div className="bg-neutral-900/90 border border-neutral-800 p-6 rounded-2xl shadow-2xl mb-6 backdrop-blur-md">
+          <h2 className="text-sm font-bold text-neutral-200 mb-4 border-b border-neutral-800 pb-2 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+            {tab === 'website' ? 'تنظیمات موتور سئو و وب‌سایت' : 'تنظیمات الگوریتم و پیج اینستاگرام'}
           </h2>
 
-          <form onSubmit={handleRunAnalysis} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <form onSubmit={handleAnalyze} className="space-y-4">
             <div>
-              <label style={{ fontSize: '10px', color: '#a3a3a3', display: 'block', marginBottom: '4px' }}>
-                {activeTab === 'website' ? 'آدرس وب‌سایت (URL)' : 'شناسه یا لینک پیج اینستاگرام'}
+              <label className="text-xs text-neutral-400 block mb-1.5 font-medium">
+                {tab === 'website' ? 'آدرس وب‌سایت (URL):' : 'شناسه یا لینک پیج اینستاگرام:'}
               </label>
               <input 
                 type="text" 
-                value={targetInput}
-                onChange={(e) => setTargetInput(e.target.value)}
-                placeholder={activeTab === 'website' ? 'https://example.com' : '@username یا لینک پیج'} 
-                style={{ width: '100%', backgroundColor: '#050505', border: '1px solid #262626', borderRadius: '10px', padding: '10px', fontSize: '12px', color: '#fff', outline: 'none', boxSizing: 'border-box' }}
+                value={urlInput}
+                onChange={(e) => setUrlInput(e.target.value)}
+                placeholder={tab === 'website' ? 'https://example.com' : '@username یا لینک پیج'} 
+                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-4 py-3 text-xs md:text-sm text-neutral-100 focus:border-amber-500 outline-none transition-all shadow-inner"
               />
             </div>
 
-            {/* دسته‌بندی‌ها و فیلترهای دیواری */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+            {/* دسته‌بندی‌ها و فیلترهای دیواری پیشرفته */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label style={{ fontSize: '10px', color: '#a3a3a3', display: 'block', marginBottom: '4px' }}>حوزه فعالیت</label>
+                <label className="text-xs text-neutral-400 block mb-1.5 font-medium">حوزه فعالیت اصلی</label>
                 <select 
-                  value={category} 
+                  value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  style={{ width: '100%', backgroundColor: '#050505', border: '1px solid #262626', borderRadius: '10px', padding: '8px', fontSize: '11px', color: '#fff', outline: 'none' }}
+                  className="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-3 py-2.5 text-xs text-neutral-200 outline-none focus:border-amber-500"
                 >
                   <option value="اخبار و رسانه">اخبار و رسانه</option>
                   <option value="کسب‌وکار محلی">کسب‌وکار محلی</option>
@@ -132,66 +119,81 @@ export default function Home() {
               </div>
 
               <div>
-                <label style={{ fontSize: '10px', color: '#a3a3a3', display: 'block', marginBottom: '4px' }}>نوع دسته‌بندی</label>
+                <label className="text-xs text-neutral-400 block mb-1.5 font-medium">نوع دسته / رسته</label>
                 <select 
-                  value={subCategory} 
+                  value={subCategory}
                   onChange={(e) => setSubCategory(e.target.value)}
-                  style={{ width: '100%', backgroundColor: '#050505', border: '1px solid #262626', borderRadius: '10px', padding: '8px', fontSize: '11px', color: '#fff', outline: 'none' }}
+                  className="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-3 py-2.5 text-xs text-neutral-200 outline-none focus:border-amber-500"
                 >
-                  <option value="خبرگزاری">خبرگزاری</option>
-                  <option value="سایت شرکتی">سایت شرکتی</option>
-                  <option value="پیج اینستاگرامی بیزینس">پیج بیزینس</option>
-                  <option value="فروشگاه اینترنتی">فروشگاه اینترنتی</option>
+                  {tab === 'website' ? (
+                    <>
+                      <option value="خبرگزاری">خبرگزاری و پایگاه خبری</option>
+                      <option value="سایت شرکتی">سایت شرکتی و خدماتی</option>
+                      <option value="فروشگاه اینترنتی">فروشگاه اینترنتی</option>
+                    </>
+                  ) : (
+                    <>
+                      <option value="پیج بیزینس">پیج تجاری و خدماتی</option>
+                      <option value="بلاگر و اینفلونسر">بلاگر / اینفلونسر</option>
+                      <option value="فروشگاه اینستا">فروشگاه آنلاین اینستاگرام</option>
+                    </>
+                  )}
                 </select>
               </div>
             </div>
 
             <div>
-              <label style={{ fontSize: '10px', color: '#a3a3a3', display: 'block', marginBottom: '4px' }}>منطقه و محدوده جغرافیایی (سئو محلی)</label>
+              <label className="text-xs text-neutral-400 block mb-1.5 font-medium">محدوده جغرافیایی (سئو محلی و استانی)</label>
               <select 
-                value={region} 
+                value={region}
                 onChange={(e) => setRegion(e.target.value)}
-                style={{ width: '100%', backgroundColor: '#050505', border: '1px solid #262626', borderRadius: '10px', padding: '8px', fontSize: '11px', color: '#fff', outline: 'none' }}
+                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-3 py-2.5 text-xs text-neutral-200 outline-none focus:border-amber-500"
               >
-                <option value="منطقه ۱">منطقه ۱ (تهران و حومه)</option>
-                <option value="منطقه ۲">منطقه ۲ (غرب استان)</option>
-                <option value="سراسر کشور">سراسر کشور (کشوری)</option>
+                <option value="منطقه ۱ (تهران)">منطقه ۱ (تهران و کلان‌شهرها)</option>
+                <option value="منطقه ۲ (غرب استان)">منطقه ۲ (غرب استان / اسلامشهر)</option>
+                <option value="سراسر کشور">سراسر کشور (۳۱ استان)</option>
               </select>
             </div>
 
             <button 
               type="submit"
               disabled={loading}
-              style={{ width: '100%', background: 'linear-gradient(to right, #f59e0b, #d97706)', color: '#0a0a0a', fontWeight: 'bold', padding: '12px', borderRadius: '10px', fontSize: '12px', border: 'none', cursor: 'pointer', marginTop: '6px' }}
+              className="w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-neutral-950 font-black py-3.5 rounded-xl text-xs md:text-sm shadow-xl hover:opacity-95 transition-all cursor-pointer mt-2"
             >
-              {loading ? 'در حال پردازش هوش مصنوعی...' : 'شروع تحلیل جامع + نمودار + ۵ رقیب برتر'}
+              {loading ? 'در حال پردازش هوش مصنوعی و ردیابی کلمات...' : 'شروع تحلیل جامع + نمودار + ۵ رقیب برتر'}
             </button>
           </form>
         </div>
 
-        {/* بخش نمایش نتایج تحلیل موتور هوش مصنوعی */}
-        {analysisResult && (
-          <div style={{ backgroundColor: '#121212', border: '1px solid #10b981', padding: '16px', borderRadius: '16px', marginBottom: '16px' }}>
-            <h3 style={{ fontSize: '13px', fontWeight: 'bold', color: '#10b981', marginBottom: '8px' }}>
-              ✅ نتیجه تحلیل هوشمند برای: {analysisResult.target}
+        {/* کادر نمایش نتایج موتور تحلیل */}
+        {result && (
+          <div className="bg-neutral-900 border border-emerald-500/50 p-5 rounded-2xl shadow-2xl mb-6 animate-fade-in">
+            <h3 className="text-xs md:text-sm font-bold text-emerald-400 mb-2 flex items-center gap-2">
+              <span>✅</span> گزارش تحلیل هوشمند: <span className="text-white underline">{result.target}</span>
             </h3>
-            <p style={{ fontSize: '11px', color: '#d4d4d4', margin: '4px 0' }}>نوع بررسی: {analysisResult.type} ({analysisResult.category})</p>
-            <p style={{ fontSize: '11px', color: '#f59e0b', margin: '4px 0' }}>وضعیت کلمات: {analysisResult.keywordsIndexed}</p>
-            
-            <div style={{ marginTop: '10px', borderTop: '1px solid #262626', paddingTop: '8px' }}>
-              <div style={{ fontSize: '11px', fontWeight: 'bold', color: '#3b82f6', marginBottom: '4px' }}>۵ رقیب برتر شناسایی شده:</div>
-              <ul style={{ margin: '0', paddingRight: '16px', fontSize: '11px', color: '#a3a3a3' }}>
-                {analysisResult.competitors.map((comp, idx) => (
-                  <li key={idx} style={{ marginBottom: '2px' }}>{comp}</li>
+            <div className="space-y-1 text-xs text-neutral-300 font-mono mb-3">
+              <p>📌 حالت موتور: <span className="text-amber-400">{result.mode}</span></p>
+              <p>🏷️ دسته‌بندی: {result.meta}</p>
+              <p>⚡ وضعیت کلمات کلیدی: <span className="text-emerald-400">{result.keywords}</span></p>
+            </div>
+
+            <div className="border-t border-neutral-800 pt-3">
+              <div className="text-xs font-bold text-blue-400 mb-2">۵ رقیب برتر شناسایی‌شده در منطقه:</div>
+              <ul className="space-y-1 text-xs text-neutral-400">
+                {result.competitors.map((comp, idx) => (
+                  <li key={idx} className="bg-neutral-950/60 px-3 py-1.5 rounded-lg border border-neutral-800/60">
+                    {comp}
+                  </li>
                 ))}
               </ul>
             </div>
           </div>
         )}
+
       </div>
 
       {/* فوتر امنیتی و حقوقی */}
       <SecurityFooter />
-    </div>
+    </main>
   );
 }
