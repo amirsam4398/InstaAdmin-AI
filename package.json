@@ -1,5 +1,5 @@
 {
-  "name": "royalfam-app",
+  "name": "instaadmin-ai",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/swc-wasm-nodejs": "^16.4.3",
+    "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.35"
+    "three": "^0.187.0"
   }
 }
